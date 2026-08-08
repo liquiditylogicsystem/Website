@@ -3,13 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LiquidityLogicSystem — Custom Algorithmic Trading Bots</title>
-<meta name="description" content="LiquidityLogicSystem builds custom trading bots designed around your strategy — ICT, SMC, MMC, and beyond. Tell us how you trade; we automate it.">
+<title>LiquidityLogicSystem — Automate Your Trading Strategy</title>
+<meta name="description" content="LiquidityLogicSystem builds custom trading bots that automate your strategy — ICT, SMC, MMC, and beyond. Tell us how you trade; we automate it.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<div id="candleField" aria-hidden="true"></div>
 
 <header class="nav">
   <div class="nav-inner">
@@ -17,42 +15,44 @@
     <nav class="links">
       <a href="#about">About</a>
       <a href="#strategies">Strategies</a>
-      <a href="#process">How it works</a>
+      <a href="#process">Process</a>
       <a href="#tech">Tech</a>
       <a href="#contact">Contact</a>
     </nav>
     <div class="nav-right">
-      <button id="themeToggle" type="button" aria-label="Switch between dark and light mode" title="Switch theme">🌙</button>
-      <a class="nav-cta" href="#contact">Get in touch</a>
+      <button id="themeToggle" type="button" aria-label="Switch between dark and light mode" title="Switch theme">☀️</button>
+      <a class="nav-cta btn btn-ghost" style="padding:9px 16px; font-size:12.5px;" href="#contact">Get in touch</a>
     </div>
   </div>
 </header>
 
 <section class="hero">
+  <canvas id="heroCanvas"></canvas>
   <div class="wrap hero-inner">
-    <span class="eyebrow reveal">Custom algorithmic trading systems</span>
-    <h1 class="reveal">We build the bot around <em>your</em> strategy — not the other way around.</h1>
-    <p class="lead reveal">LiquidityLogicSystem is a startup built for one job: taking the way you already trade — your rules, your risk, your edge — and turning it into a disciplined, automated bot that executes it exactly the way you would, every single time.</p>
-    <div class="hero-actions reveal">
-      <a class="btn btn-primary" href="#contact">Start a project</a>
-      <a class="btn btn-ghost" href="#strategies">See what we can automate</a>
+    <span class="eyebrow">Custom algorithmic trading systems</span>
+    <h1>Automate your strategy. <em>Precisely.</em></h1>
+    <p class="lead">LiquidityLogicSystem takes the way you already trade — your rules, your risk, your edge — and turns it into a bot that automates it exactly, every single time. No templates. No generic signals. Just your strategy, automated.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#contact">Start automating</a>
+      <a class="btn btn-ghost" href="#strategies">See what we automate</a>
     </div>
   </div>
+  <div class="scroll-cue"><span class="line"></span>Scroll</div>
 </section>
 
 <section class="about" id="about">
   <div class="wrap about-grid">
     <div class="about-copy">
       <span class="kicker reveal">Who we are</span>
-      <h2 class="reveal">A startup that levels up your trading.</h2>
-      <p class="reveal">We're a small, founder-led studio that designs and builds <strong>bespoke trading bots</strong>. Instead of selling you a one-size-fits-all system, we sit down with how you actually trade — your entries, your risk rules, your instruments — and translate that into code that trades with the same discipline you would want from your best day, on every day.</p>
+      <h2 class="reveal">A startup built to automate your edge.</h2>
+      <p class="reveal">We're a small, founder-led studio that designs and builds <strong>bespoke trading bots</strong>. Instead of selling a one-size-fits-all system, we sit down with how you actually trade and translate it into code that executes with the same discipline you'd want from your best day — automated, and repeated on every day after.</p>
       <p class="reveal">Whether you're a discretionary trader who wants your rules automated, or a firm that needs a repeatable execution engine, we build it around your needs from the ground up.</p>
     </div>
-    <ul class="about-points reveal">
-      <li><span class="mark">01</span><span><b>Built to your rules.</b> No generic templates — every bot starts with your strategy.</span></li>
-      <li><span class="mark">02</span><span><b>Risk-first engineering.</b> Position sizing and drawdown limits are never an afterthought.</span></li>
-      <li><span class="mark">03</span><span><b>Backtested before it's live.</b> Every bot is validated on historical data before it ever touches a live account.</span></li>
-      <li><span class="mark">04</span><span><b>Direct access to the founder.</b> You're not routed through a support queue — you talk to the person building your bot.</span></li>
+    <ul class="about-points">
+      <li class="reveal"><span class="mark">01</span><span><b>Built to your rules</b><span class="d">No generic templates — every bot starts with your strategy.</span></span></li>
+      <li class="reveal"><span class="mark">02</span><span><b>Risk-first engineering</b><span class="d">Position sizing and drawdown limits are never an afterthought.</span></span></li>
+      <li class="reveal"><span class="mark">03</span><span><b>Backtested before it's live</b><span class="d">Every bot is validated on historical data before it ever touches a live account.</span></span></li>
+      <li class="reveal"><span class="mark">04</span><span><b>Direct access to the founder</b><span class="d">You're not routed through a support queue — you talk to the person automating your strategy.</span></span></li>
     </ul>
   </div>
 </section>
@@ -62,23 +62,23 @@
     <div class="section-head reveal">
       <span class="kicker">What we can automate</span>
       <h2>Strategy frameworks we build around.</h2>
-      <p>These are some of the concepts we most often translate into code. If you trade something else entirely, that's fine too — the framework below is a starting point, not a limit.</p>
+      <p>These are some of the concepts we most often turn into automated logic. If you trade something else entirely, that's fine too — this is a starting point, not a limit.</p>
     </div>
     <div class="strategy-grid">
-      <div class="strategy-card reveal">
+      <div class="strategy-card reveal" data-tilt>
         <div class="tag">ICT — INNER CIRCLE TRADER</div>
         <h3>Liquidity &amp; smart-money timing</h3>
-        <p>Order blocks, fair value gaps, liquidity sweeps, and killzone timing — we can encode ICT-style concepts so the bot waits for the same setups you'd wait for by hand.</p>
+        <p>Order blocks, fair value gaps, liquidity sweeps, and killzone timing — we can automate ICT-style concepts so the bot waits for the same setups you'd wait for by hand.</p>
       </div>
-      <div class="strategy-card reveal">
+      <div class="strategy-card reveal" data-tilt>
         <div class="tag">SMC — SMART MONEY CONCEPTS</div>
         <h3>Structure-led entries</h3>
-        <p>Break of structure, change of character, supply and demand zones — SMC-based bots read market structure shifts before committing to a direction.</p>
+        <p>Break of structure, change of character, supply and demand zones — SMC-based bots read market structure shifts before automatically committing to a direction.</p>
       </div>
-      <div class="strategy-card reveal">
+      <div class="strategy-card reveal" data-tilt>
         <div class="tag">MMC — MARKET MAKER CONCEPTS</div>
         <h3>Reading engineered moves</h3>
-        <p>Modeling how liquidity gets engineered and swept before the "real" move — useful for traders whose edge comes from anticipating stop-hunts and reversals.</p>
+        <p>Modeling how liquidity gets engineered and swept before the "real" move — automated for traders whose edge comes from anticipating stop-hunts and reversals.</p>
       </div>
     </div>
   </div>
@@ -88,34 +88,29 @@
   <div class="wrap">
     <div class="section-head reveal">
       <span class="kicker">How it works</span>
-      <h2>From a conversation to a working bot.</h2>
+      <h2>From a conversation to a working, automated bot.</h2>
     </div>
-    <ol class="process-list">
-      <li class="reveal">
-        <div>
-          <h3>Consultation</h3>
-          <p>You tell us how you trade — strategy, instruments, risk tolerance, and what "automated" should actually mean for you.</p>
-        </div>
-      </li>
-      <li class="reveal">
-        <div>
-          <h3>Strategy mapping</h3>
-          <p>We translate your rules — ICT, SMC, MMC, or your own system — into precise, testable logic before a single line of production code is written.</p>
-        </div>
-      </li>
-      <li class="reveal">
-        <div>
-          <h3>Build &amp; backtest</h3>
-          <p>The bot is built, then stress-tested against historical data so you can see how it would have behaved before it trades a single dollar live.</p>
-        </div>
-      </li>
-      <li class="reveal">
-        <div>
-          <h3>Delivery &amp; support</h3>
-          <p>You get the finished bot plus direct support from the founder while you get it running on your own account.</p>
-        </div>
-      </li>
-    </ol>
+    <div class="process-body">
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <ol class="process-list">
+        <li class="process-step reveal">
+          <div class="ghost-num">01</div>
+          <div><h3>Consultation</h3><p>You tell us how you trade — strategy, instruments, risk tolerance, and what "automated" should actually mean for you.</p></div>
+        </li>
+        <li class="process-step reveal">
+          <div class="ghost-num">02</div>
+          <div><h3>Strategy mapping</h3><p>We translate your rules — ICT, SMC, MMC, or your own system — into precise, testable logic before a single line of production code is written.</p></div>
+        </li>
+        <li class="process-step reveal">
+          <div class="ghost-num">03</div>
+          <div><h3>Build &amp; backtest</h3><p>The bot is built, then stress-tested against historical data so you can see how it would have automated your strategy before it trades a single dollar live.</p></div>
+        </li>
+        <li class="process-step reveal">
+          <div class="ghost-num">04</div>
+          <div><h3>Delivery &amp; support</h3><p>You get the finished bot plus direct support from the founder while you get it running and automating on your own account.</p></div>
+        </li>
+      </ol>
+    </div>
   </div>
 </section>
 
@@ -123,8 +118,8 @@
   <div class="wrap">
     <div class="section-head reveal">
       <span class="kicker">Built with</span>
-      <h2>Tools we build in.</h2>
-      <p>We work in the platforms and languages most trading bots actually run on.</p>
+      <h2>Tools we automate in.</h2>
+      <p>We work in the platforms and languages most trading automation actually runs on.</p>
     </div>
     <div class="tech-grid">
       <div class="tech-chip reveal"><div class="chip-3d">Py</div><span>Python</span></div>
@@ -136,27 +131,12 @@
   </div>
 </section>
 
-<section class="testimonials" id="reviews">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="kicker">Client voices</span>
-      <h2>We're just getting started.</h2>
-    </div>
-    <div class="testi-empty reveal">
-      <div class="glyph">"</div>
-      <h3>Reviews coming soon.</h3>
-      <p>LiquidityLogicSystem is a new studio, and we'd rather earn real reviews from real clients than show you anything else. If you're one of our first clients, your feedback will show up here.</p>
-      <a class="btn btn-ghost" href="#contact">Be one of our first clients</a>
-    </div>
-  </div>
-</section>
-
 <section class="cta" id="contact">
   <div class="wrap">
-    <div class="logo-mark-wrap reveal"><img src="logo.png" alt="LiquidityLogicSystem"></div>
-    <h2 class="reveal">Tell us how you trade. We'll build the bot.</h2>
-    <p class="reveal">For inquiries or to place an order, reach out directly — we reply from the same address.</p>
-    <a class="btn btn-primary reveal" id="contactBtn" href="https://mail.google.com/mail/?view=cm&fs=1&to=support@liquiditylogicssystem.online&su=Trading%20Bot%20Inquiry" target="_blank" rel="noopener">Contact us — support@liquiditylogicssystem.online</a>
+    <span class="kicker reveal">Get in touch</span>
+    <h2 class="reveal">Tell us how you trade.<br>We'll automate it.</h2>
+    <p class="lead reveal">For inquiries or to place an order, reach out directly — we reply from the same address.</p>
+    <a class="email-link reveal" href="mailto:support@liquiditylogicssystem.online">support@liquiditylogicssystem.online</a>
   </div>
 </section>
 
@@ -167,6 +147,9 @@
   </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
