@@ -1,31 +1,15 @@
 /* ===========================================================
-   LiquidityLogicSystem — behavior v2
+   LiquidityLogicSystem — behavior v3
    - WebGL hero (three.js): rotating wireframe core + liquidity particles
    - GSAP + ScrollTrigger: choreographed fade in/out, scrubbed progress line
    - Cursor-reactive 3D tilt on strategy cards
-   - Dark/light theme toggle
+   - Light theme only — no toggle
    =========================================================== */
 
 (function () {
   'use strict';
 
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ---------- theme toggle ---------- */
-  var toggleBtn = document.getElementById('themeToggle');
-  function setTheme(isLight) {
-    document.body.classList.toggle('light', isLight);
-    if (toggleBtn) {
-      toggleBtn.textContent = isLight ? '🌙' : '☀️';
-      toggleBtn.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
-    }
-  }
-  setTheme(false); // dark by default
-  if (toggleBtn) {
-    toggleBtn.addEventListener('click', function () {
-      setTheme(!document.body.classList.contains('light'));
-    });
-  }
 
   /* ---------- GSAP scroll choreography ---------- */
   if (window.gsap && window.ScrollTrigger) {
@@ -51,7 +35,6 @@
       );
     });
 
-    // scrubbed vertical progress line through the process section
     var fill = document.getElementById('progressFill');
     var body = document.querySelector('.process-body');
     if (fill && body) {
@@ -67,7 +50,6 @@
       });
     }
   } else {
-    // fallback: just show everything if the CDN scripts failed to load
     document.querySelectorAll('.reveal').forEach(function (el) {
       el.style.opacity = 1;
       el.style.transform = 'none';
@@ -93,7 +75,7 @@
     });
   });
 
-  /* ---------- WebGL hero scene (three.js) ---------- */
+  /* ---------- WebGL hero scene (three.js) — tuned for a light background ---------- */
   var canvas = document.getElementById('heroCanvas');
   var heroSection = document.querySelector('.hero');
   if (!canvas || !window.THREE || !heroSection) return;
@@ -111,15 +93,15 @@
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.setSize(heroSection.clientWidth, heroSection.clientHeight);
 
-    // wireframe core — the "automation engine"
+    // wireframe core — the "automation engine" (deep bronze-gold, reads clearly on a light background)
     var coreGeo = new THREE.IcosahedronGeometry(1.7, 1);
-    var coreMat = new THREE.MeshBasicMaterial({ color: 0xf5b700, wireframe: true, transparent: true, opacity: 0.55 });
+    var coreMat = new THREE.MeshBasicMaterial({ color: 0xa9750c, wireframe: true, transparent: true, opacity: 0.7 });
     core = new THREE.Mesh(coreGeo, coreMat);
     core.position.set(1.6, 0, 0);
     scene.add(core);
 
     var innerGeo = new THREE.IcosahedronGeometry(1.1, 1);
-    var innerMat = new THREE.MeshBasicMaterial({ color: 0x35e6b0, wireframe: true, transparent: true, opacity: 0.35 });
+    var innerMat = new THREE.MeshBasicMaterial({ color: 0x0c8c68, wireframe: true, transparent: true, opacity: 0.45 });
     var innerCore = new THREE.Mesh(innerGeo, innerMat);
     innerCore.position.copy(core.position);
     scene.add(innerCore);
@@ -129,8 +111,8 @@
     var count = window.innerWidth < 700 ? 500 : 1100;
     var positions = new Float32Array(count * 3);
     var colors = new Float32Array(count * 3);
-    var goldColor = new THREE.Color(0xf5b700);
-    var tealColor = new THREE.Color(0x35e6b0);
+    var goldColor = new THREE.Color(0xa9750c);
+    var tealColor = new THREE.Color(0x0c8c68);
 
     for (var i = 0; i < count; i++) {
       var radius = 2.4 + Math.random() * 2.6;
@@ -152,8 +134,8 @@
     particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     particleGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
     var particleMat = new THREE.PointsMaterial({
-      size: 0.028, vertexColors: true, transparent: true, opacity: 0.75,
-      blending: THREE.AdditiveBlending, depthWrite: false
+      size: 0.03, vertexColors: true, transparent: true, opacity: 0.85,
+      depthWrite: false
     });
     particles = new THREE.Points(particleGeo, particleMat);
     scene.add(particles);
