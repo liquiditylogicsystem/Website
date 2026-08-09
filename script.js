@@ -174,14 +174,7 @@
     requestAnimationFrame(animate);
     if (!running) return;
 
-    core.rotation.y += 0.0022;
-    core.rotation.x += 0.0009;
-    if (core.userData.inner) {
-      core.userData.inner.rotation.y -= 0.0032;
-      core.userData.inner.rotation.x -= 0.0014;
-    }
-    particles.rotation.y += 0.0007;
-
+    // scene stays still by default — only the camera drifts gently with the cursor
     targetRotY += (mouseX * 0.4 - targetRotY) * 0.04;
     targetRotX += (mouseY * 0.25 - targetRotX) * 0.04;
     camera.position.x = 1.4 + targetRotY;
