@@ -81,7 +81,9 @@
   if (!canvas || !window.THREE || !heroSection) return;
 
   var renderer, scene, camera, core, particles, running = true;
+  var coreMat, innerMat, particleMat;
   var mouseX = 0, mouseY = 0, targetRotX = 0, targetRotY = 0;
+  var clockStart = Date.now();
 
   function init() {
     scene = new THREE.Scene();
@@ -95,13 +97,13 @@
 
     // wireframe core — the "automation engine" (deep bronze-gold, reads clearly on a light background)
     var coreGeo = new THREE.IcosahedronGeometry(1.7, 1);
-    var coreMat = new THREE.MeshBasicMaterial({ color: 0xa9750c, wireframe: true, transparent: true, opacity: 0.7 });
+    coreMat = new THREE.MeshBasicMaterial({ color: 0xa9750c, wireframe: true, transparent: true, opacity: 0.7 });
     core = new THREE.Mesh(coreGeo, coreMat);
     core.position.set(1.6, 0, 0);
     scene.add(core);
 
     var innerGeo = new THREE.IcosahedronGeometry(1.1, 1);
-    var innerMat = new THREE.MeshBasicMaterial({ color: 0x0c8c68, wireframe: true, transparent: true, opacity: 0.45 });
+    innerMat = new THREE.MeshBasicMaterial({ color: 0x0c8c68, wireframe: true, transparent: true, opacity: 0.45 });
     var innerCore = new THREE.Mesh(innerGeo, innerMat);
     innerCore.position.copy(core.position);
     scene.add(innerCore);
@@ -133,7 +135,7 @@
     var particleGeo = new THREE.BufferGeometry();
     particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     particleGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-    var particleMat = new THREE.PointsMaterial({
+    particleMat = new THREE.PointsMaterial({
       size: 0.03, vertexColors: true, transparent: true, opacity: 0.85,
       depthWrite: false
     });
@@ -150,11 +152,9 @@
       io.observe(heroSection);
     }
 
-    if (reduceMotion) {
-      renderer.render(scene, camera);
-    } else {
-      animate();
-    }
+    // Runs continuously on both desktop and mobile — this is a deliberate,
+    // slow, decorative loop (not a flashing effect), always on per request.
+    animate();
   }
 
   function onMouseMove(e) {
@@ -174,7 +174,25 @@
     requestAnimationFrame(animate);
     if (!running) return;
 
-    // scene stays still by default — only the camera drifts gently with the cursor
+    var t = Date.now() - clockStart;
+
+    // constant rotation — the core, its inner shell, and the particle field
+    // never stop moving
+    core.rotation.y += 0.0028;
+    core.rotation.x += 0.0011;
+    if (core.userData.inner) {
+      core.userData.inner.rotation.y -= 0.0038;
+      core.userData.inner.rotation.x -= 0.0017;
+    }
+    particles.rotation.y += 0.0009;
+    particles.rotation.x += 0.0002;
+
+    // constant glow pulse — opacity breathes slowly on a sine wave
+    if (coreMat) coreMat.opacity = 0.55 + Math.sin(t * 0.0009) * 0.22;
+    if (innerMat) innerMat.opacity = 0.3 + Math.sin(t * 0.0013 + 1.2) * 0.18;
+    if (particleMat) particleMat.opacity = 0.65 + Math.sin(t * 0.0007 + 2.1) * 0.2;
+
+    // cursor still adds a gentle extra parallax on top of the constant motion
     targetRotY += (mouseX * 0.4 - targetRotY) * 0.04;
     targetRotX += (mouseY * 0.25 - targetRotX) * 0.04;
     camera.position.x = 1.4 + targetRotY;
