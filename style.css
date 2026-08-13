@@ -97,23 +97,27 @@ nav.links a:hover, nav.links a:focus-visible{color:var(--gold);}
 }
 .hero-bg{position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events:none;}
 .aurora-bloom{
+  /* Soft glow via pre-softened radial gradient — NO filter: blur() forces
+     the compositor to re-rasterize a huge area every frame and janks weak
+     GPUs. A gradient with a wide falloff looks the same and animates as a
+     pure GPU transform (cheap, smooth, 120fps-friendly). */
   position:absolute; border-radius:50%;
-  filter:blur(48px) saturate(1.5);
   will-change:transform;
+  transform:translateZ(0);
 }
 .bloom-a{ /* teal — top right */
-  width:72vw; height:84vh; top:-10%; right:-12%;
-  background:radial-gradient(50% 50% at 50% 50%, rgba(47,191,150,.58), transparent 68%);
+  width:78vw; height:92vh; top:-12%; right:-14%;
+  background:radial-gradient(50% 50% at 50% 50%, rgba(47,191,150,.60), rgba(47,191,150,.17) 45%, transparent 70%);
   animation:auroraDriftA 26s ease-in-out infinite alternate;
 }
 .bloom-b{ /* gold — bottom right */
-  width:64vw; height:74vh; bottom:-14%; right:-6%;
-  background:radial-gradient(50% 50% at 50% 50%, rgba(212,164,55,.50), transparent 68%);
+  width:70vw; height:80vh; bottom:-14%; right:-6%;
+  background:radial-gradient(50% 50% at 50% 50%, rgba(212,164,55,.54), rgba(212,164,55,.15) 45%, transparent 70%);
   animation:auroraDriftB 34s ease-in-out infinite alternate;
 }
 .bloom-c{ /* deep indigo — faint depth behind the headline */
-  width:58vw; height:80vh; left:-12%; top:2%;
-  background:radial-gradient(50% 50% at 50% 50%, rgba(74,108,168,.48), transparent 70%);
+  width:62vw; height:84vh; left:-12%; top:2%;
+  background:radial-gradient(50% 50% at 50% 50%, rgba(74,108,168,.50), rgba(74,108,168,.13) 45%, transparent 72%);
   animation:auroraDriftC 22s ease-in-out infinite alternate;
 }
 @keyframes auroraDriftA{
