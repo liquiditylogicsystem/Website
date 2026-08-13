@@ -8,14 +8,21 @@
    - Proof band: self-drawing equity curve + count-up stats
    - Magnetic CTAs, 3D tilt cards
    - Hero background: pure-CSS aurora + grid (no JS required)
+   - Libraries are self-hosted in vendor/ (no CDN dependency)
+   - prefers-reduced-motion only disables Lenis / magnetic / 3D tilt;
+     core animations run for everyone (site is designed to be animated)
    =========================================================== */
 
 (function () {
   'use strict';
 
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  // preview/testing hook: ?motion=full forces the full animated experience
-  // (JS animations AND CSS animations, via the force-motion class gate)
+  // The site is designed to be animated: core reveals, entrances, count-ups
+  // and the aurora run for everyone. reduceMotion only disables the
+  // motion-heavy extras (Lenis smooth scroll, magnetic buttons, 3D tilt).
+  // ?motion=full is a compatibility hook for the preview: it forces the
+  // complete experience (including the motion-heavy extras) and adds the
+  // force-motion class.
   if (/\bmotion=(full|on)\b/.test(location.search)) {
     reduceMotion = false;
     document.documentElement.classList.add('force-motion');
@@ -151,9 +158,10 @@
     drawMiniFrame();
   }
 
-  // Without the animation stack — or for reduced-motion users — show a
-  // static page: drop the `js` class so every CSS-hidden state is revealed.
-  if (reduceMotion || !hasStack) {
+  // Without the animation stack, show a static page: drop the `js` class so
+  // every CSS-hidden state is revealed. The libs are self-hosted, so this
+  // only fires if JS itself is unavailable or fails to parse.
+  if (!hasStack) {
     document.documentElement.classList.remove('js');
     if (cctx) { initMiniChart(); drawMiniFrame(); }
     return;
