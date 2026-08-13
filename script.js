@@ -54,7 +54,7 @@
     if (!chartCanvas) return;
     var w = chartCanvas.clientWidth || 300;
     var h = chartCanvas.clientHeight || 150;
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     chartCanvas.width = Math.round(w * dpr);
     chartCanvas.height = Math.round(h * dpr);
     cctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -138,7 +138,7 @@
 
   function miniLoop(now) {
     requestAnimationFrame(miniLoop);
-    if (!chartRunning) return;
+    if (!chartRunning || document.hidden) return;
     if (!chartLastT) chartLastT = now;
     var dt = Math.min((now - chartLastT) / 1000, 0.05);
     chartLastT = now;
