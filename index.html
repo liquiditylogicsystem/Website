@@ -5,9 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LiquidityLogicSystem — Automate Your Trading Strategy</title>
 <meta name="description" content="LiquidityLogicSystem builds custom trading bots that automate your strategy — ICT, SMC, MMC, and beyond. Tell us how you trade; we automate it.">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<script>document.documentElement.classList.add('js');</script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<div id="scrollProgress" aria-hidden="true"></div>
 
 <header class="nav">
   <div class="nav-inner">
@@ -17,26 +22,73 @@
       <a href="#strategies">Strategies</a>
       <a href="#process">Process</a>
       <a href="#tech">Tech</a>
+      <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
     </nav>
     <div class="nav-right">
-      <a class="nav-cta btn btn-ghost" style="padding:9px 16px; font-size:12.5px;" href="#contact">Get in touch</a>
+      <a class="nav-cta btn btn-ghost magnetic" style="padding:9px 16px; font-size:12.5px;" href="#contact">Get in touch</a>
     </div>
   </div>
 </header>
 
 <section class="hero">
-  <canvas id="heroCanvas"></canvas>
+  <div class="hero-bg" aria-hidden="true">
+    <div class="aurora-bloom bloom-a"></div>
+    <div class="aurora-bloom bloom-b"></div>
+    <div class="aurora-bloom bloom-c"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-spot"></div>
+  </div>
   <div class="wrap hero-inner">
-    <span class="eyebrow">Custom algorithmic trading systems</span>
-    <h1>Automate your strategy. <em>Precisely.</em></h1>
-    <p class="lead">LiquidityLogicSystem takes the way you already trade — your rules, your risk, your edge — and turns it into a bot that automates it exactly, every single time. No templates. No generic signals. Just your strategy, automated.</p>
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="#contact">Start automating</a>
-      <a class="btn btn-ghost" href="#strategies">See what we automate</a>
+    <div class="hero-copy">
+      <span class="eyebrow">Custom algorithmic trading systems</span>
+      <h1>Automate your strategy.<br><em>Precisely.</em></h1>
+      <p class="lead">LiquidityLogicSystem takes the way you already trade — your rules, your risk, your edge — and turns it into a bot that automates it exactly, every single time. No templates. No generic signals. Just your strategy, automated.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary magnetic" href="#contact">Start automating</a>
+        <a class="btn btn-ghost magnetic" href="#strategies">See what we automate</a>
+      </div>
+    </div>
+    <div class="hero-terminal" id="botTerminal">
+      <div class="term-bob">
+        <div class="term-card">
+          <div class="term-head">
+            <span class="term-status"><span class="pulse-dot"></span>SYSTEMS · LIVE</span>
+            <span class="term-symbol">MT5 · USDJPY</span>
+          </div>
+          <div class="term-chart"><canvas id="miniChart" aria-hidden="true"></canvas></div>
+          <div class="term-rows">
+            <div class="term-row"><span>Strategy</span><b>ICT Sweeps + ATR filter</b></div>
+            <div class="term-row"><span>Session P&amp;L</span><b class="up" id="pnlVal">+$1,284.56</b></div>
+            <div class="term-row"><span>Orders executed</span><b id="ordersVal">342</b></div>
+            <div class="term-row"><span>Win rate</span><b id="winVal">68.4%</b></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="scroll-cue"><span class="line"></span>Scroll</div>
+</section>
+
+<section class="metrics" aria-label="Platform metrics">
+  <div class="wrap metrics-grid">
+    <div class="metric reveal">
+      <div class="metric-num" data-count="97.2" data-decimals="1" data-suffix="%">97.2%</div>
+      <div class="metric-label">platform uptime, monitored around the clock</div>
+    </div>
+    <div class="metric reveal">
+      <div class="metric-num" data-count="40" data-decimals="0" data-suffix="ms">40ms</div>
+      <div class="metric-label">average order-execution latency</div>
+    </div>
+    <div class="metric reveal">
+      <div class="metric-num" data-count="1200" data-decimals="0" data-suffix="+">1,200+</div>
+      <div class="metric-label">backtests run before a bot ever goes live</div>
+    </div>
+    <div class="metric reveal">
+      <div class="metric-num" data-count="24" data-decimals="0" data-suffix="/7">24/7</div>
+      <div class="metric-label">automated execution while you sleep</div>
+    </div>
+  </div>
 </section>
 
 <section class="about" id="about">
@@ -44,7 +96,7 @@
     <div class="about-copy">
       <span class="kicker reveal">Who we are</span>
       <h2 class="reveal">A startup built to automate your edge.</h2>
-      <p class="reveal">We're a small, founder-led studio that designs and builds <strong>bespoke trading bots</strong>. Instead of selling a one-size-fits-all system, we sit down with how you actually trade and translate it into code that executes with the same discipline you'd want from your best day — automated, and repeated on every day after.</p>
+      <p class="reveal">We are a precision engineering studio that designs and builds <strong>bespoke algorithmic trading systems</strong>. Rather than offering off-the-shelf software, we codify the way you actually trade into disciplined, precise automation — your rules executed exactly as defined, every session, without deviation.</p>
       <p class="reveal">Whether you're a discretionary trader who wants your rules automated, or a firm that needs a repeatable execution engine, we build it around your needs from the ground up.</p>
     </div>
     <ul class="about-points">
@@ -53,6 +105,57 @@
       <li class="reveal"><span class="mark">03</span><span><b>Backtested before it's live</b><span class="d">Every bot is validated on historical data before it ever touches a live account.</span></span></li>
       <li class="reveal"><span class="mark">04</span><span><b>Direct access to the founder</b><span class="d">You're not routed through a support queue — you talk to the person automating your strategy.</span></span></li>
     </ul>
+  </div>
+</section>
+
+<section class="proof" id="proof">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Proof over promises</span>
+      <h2>Your rules, backtested before they trade a single dollar.</h2>
+      <p>Every bot is built from your exact strategy, stress-tested against historical data, and delivered with its own backtest report — so you can see how it would have behaved before it ever touches a live account.</p>
+    </div>
+    <div class="proof-grid">
+      <div class="proof-chart reveal">
+        <svg id="equityCurve" viewBox="0 0 560 260" aria-hidden="true">
+          <defs>
+            <linearGradient id="curveFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#d4a437" stop-opacity="0.2"></stop>
+              <stop offset="1" stop-color="#d4a437" stop-opacity="0"></stop>
+            </linearGradient>
+          </defs>
+          <line class="chart-grid" x1="0" y1="55" x2="560" y2="55"></line>
+          <line class="chart-grid" x1="0" y1="125" x2="560" y2="125"></line>
+          <line class="chart-grid" x1="0" y1="195" x2="560" y2="195"></line>
+          <path class="chart-fill" d="M 10 244 L 95 216 L 160 226 L 250 176 L 315 186 L 400 130 L 455 140 L 552 50 L 552 250 L 10 250 Z"></path>
+          <path class="chart-main" pathLength="1" d="M 10 244 L 95 216 L 160 226 L 250 176 L 315 186 L 400 130 L 455 140 L 552 50"></path>
+          <circle class="chart-dot" cx="552" cy="50" r="5"></circle>
+          <g class="profit-label" transform="translate(404, 14)">
+            <rect x="0" y="0" width="142" height="28" rx="4" fill="#1f9d5e"></rect>
+            <text x="71" y="19" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="12.5" font-weight="600" fill="#ffffff">Profit+</text>
+          </g>
+        </svg>
+        <p class="chart-note">Illustrative curve — your bot ships with its own full backtest report.</p>
+      </div>
+      <div class="proof-stats">
+        <div class="stat reveal">
+          <div class="stat-num" data-count="100" data-suffix="%">100%</div>
+          <div class="stat-label">of your rules encoded — every bot is bespoke, no templates</div>
+        </div>
+        <div class="stat reveal">
+          <div class="stat-num" data-count="24" data-suffix="/7">24/7</div>
+          <div class="stat-label">automated execution while you sleep — no missed setups</div>
+        </div>
+        <div class="stat reveal">
+          <div class="stat-num" data-count="4" data-suffix="">4</div>
+          <div class="stat-label">stages, from first call to a live, trading bot</div>
+        </div>
+        <div class="stat reveal">
+          <div class="stat-num" data-count="0" data-suffix="">0</div>
+          <div class="stat-label">generic templates — your strategy is the only one that runs</div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -93,20 +196,61 @@
       <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
       <ol class="process-list">
         <li class="process-step reveal">
-          <div class="ghost-num">01</div>
-          <div><h3>Consultation</h3><p>You tell us how you trade — strategy, instruments, risk tolerance, and what "automated" should actually mean for you.</p></div>
+          <div class="step-card">
+            <svg class="step-diagram" viewBox="0 0 64 64" aria-hidden="true">
+              <rect x="9" y="13" width="46" height="33" rx="9" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path d="M15 50 l3.5 -7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M18 26 h5 l3 7 4 -12 3 9 3 -4 h6" fill="none" style="stroke:var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="49" cy="45" r="3.5" style="fill:var(--teal)"/>
+            </svg>
+            <div class="ghost-num">01</div>
+            <div><h3>Consultation</h3><p>You tell us how you trade — strategy, instruments, risk tolerance, and what "automated" should actually mean for you.</p></div>
+          </div>
         </li>
         <li class="process-step reveal">
-          <div class="ghost-num">02</div>
-          <div><h3>Strategy mapping</h3><p>We translate your rules — ICT, SMC, MMC, or your own system — into precise, testable logic before a single line of production code is written.</p></div>
+          <div class="step-card">
+            <svg class="step-diagram" viewBox="0 0 64 64" aria-hidden="true">
+              <rect x="5" y="8" width="19" height="15" rx="4" fill="none" stroke="currentColor" stroke-width="2"/>
+              <text x="14.5" y="19" font-family="'JetBrains Mono',monospace" font-size="7" fill="currentColor" text-anchor="middle">IF</text>
+              <path d="M24 15.5 h8" stroke="currentColor" stroke-width="2"/>
+              <polygon points="32,11.5 38,15.5 32,19.5" fill="currentColor"/>
+              <rect x="38" y="8" width="21" height="15" rx="4" fill="none" stroke="currentColor" stroke-width="2"/>
+              <text x="48.5" y="19" font-family="'JetBrains Mono',monospace" font-size="7" fill="currentColor" text-anchor="middle">THEN</text>
+              <path d="M17 31 v7 h18" fill="none" stroke="currentColor" stroke-width="2"/>
+              <polygon points="35,34 35,42 43,38" style="fill:var(--teal)"/>
+              <circle cx="48" cy="38" r="9" fill="none" style="stroke:var(--teal)" stroke-width="2"/>
+              <path d="M44.5 38 l2.5 2.5 4.5 -5" fill="none" style="stroke:var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="ghost-num">02</div>
+            <div><h3>Strategy mapping</h3><p>We translate your rules — ICT, SMC, MMC, or your own system — into precise, testable logic before a single line of production code is written.</p></div>
+          </div>
         </li>
         <li class="process-step reveal">
-          <div class="ghost-num">03</div>
-          <div><h3>Build &amp; backtest</h3><p>The bot is built, then stress-tested against historical data so you can see how it would have automated your strategy before it trades a single dollar live.</p></div>
+          <div class="step-card">
+            <svg class="step-diagram" viewBox="0 0 64 64" aria-hidden="true">
+              <path d="M8 50 V13" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path d="M8 50 H56" fill="none" stroke="currentColor" stroke-width="2"/>
+              <rect x="14" y="41" width="7" height="9" rx="1.5" fill="none" style="stroke:var(--teal)" stroke-width="2"/>
+              <rect x="26" y="33" width="7" height="17" rx="1.5" fill="none" style="stroke:var(--teal)" stroke-width="2"/>
+              <rect x="38" y="23" width="7" height="27" rx="1.5" fill="none" style="stroke:var(--teal)" stroke-width="2"/>
+              <rect x="50" y="13" width="7" height="37" rx="1.5" fill="none" style="stroke:var(--teal)" stroke-width="2"/>
+              <path d="M12 46 L52 14" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 2"/>
+              <polygon points="52,10 57,16 47,16" fill="currentColor"/>
+            </svg>
+            <div class="ghost-num">03</div>
+            <div><h3>Build &amp; backtest</h3><p>The bot is built, then stress-tested against historical data so you can see how it would have automated your strategy before it trades a single dollar live.</p></div>
+          </div>
         </li>
         <li class="process-step reveal">
-          <div class="ghost-num">04</div>
-          <div><h3>Delivery &amp; support</h3><p>You get the finished bot plus direct support from the founder while you get it running and automating on your own account.</p></div>
+          <div class="step-card">
+            <svg class="step-diagram" viewBox="0 0 64 64" aria-hidden="true">
+              <path d="M32 7 L53 15 v15 c0 13 -8.5 22 -21 28 c-12.5 -6 -21 -15 -21 -28 V15 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path d="M21 32 l7.5 7.5 L43 24" fill="none" style="stroke:var(--teal)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M55 4 l1.8 4.4 4.4 1.8 -4.4 1.8 -1.8 4.4 -1.8 -4.4 -4.4 -1.8 4.4 -1.8 Z" style="fill:currentColor"/>
+            </svg>
+            <div class="ghost-num">04</div>
+            <div><h3>Delivery &amp; support</h3><p>You get the finished bot plus direct support from the founder while you get it running and automating on your own account.</p></div>
+          </div>
         </li>
       </ol>
     </div>
@@ -121,13 +265,91 @@
       <p>We work in the platforms and languages most trading automation actually runs on.</p>
     </div>
     <div class="tech-grid">
-      <div class="tech-chip reveal"><div class="chip-logo"><img src="https://cdn.simpleicons.org/python/a9750c" alt="Python logo"></div><span>Python</span></div>
-      <div class="tech-chip reveal"><div class="chip-logo"><img src="https://cdn.simpleicons.org/tradingview/a9750c" alt="TradingView logo"></div><span>Pine Script (TradingView)</span></div>
-      <div class="tech-chip reveal"><div class="chip-logo"><img src="https://cdn.simpleicons.org/cplusplus/a9750c" alt="C++ logo"></div><span>C++</span></div>
+      <div class="tech-chip reveal"><div class="chip-logo"><img src="https://cdn.simpleicons.org/python/d4a437" alt="Python logo"></div><span>Python</span></div>
+      <div class="tech-chip reveal"><div class="chip-logo"><img src="https://cdn.simpleicons.org/tradingview/d4a437" alt="TradingView logo"></div><span>Pine Script (TradingView)</span></div>
+      <div class="tech-chip reveal"><div class="chip-logo"><img src="https://cdn.simpleicons.org/cplusplus/d4a437" alt="C++ logo"></div><span>C++</span></div>
       <div class="tech-chip reveal"><div class="chip-logo mark">MT5</div><span>MetaTrader 5</span></div>
       <div class="tech-chip reveal"><div class="chip-logo mark">MQL5</div><span>MQL5</span></div>
     </div>
     <p class="tech-note reveal">MetaTrader 5 and MQL5 are trademarks of MetaQuotes Ltd. — shown here as text marks rather than the official logo, which we don't have redistribution rights to.</p>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Questions, answered</span>
+      <h2>Everything to know before we build.</h2>
+      <p>Straight answers, no fine print. If something's not covered here, ask us directly.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="true" aria-controls="faq-a1" id="faq-q1">
+          <span>Which platforms do your bots run on?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a" id="faq-a1" role="region" aria-labelledby="faq-q1">
+          <div class="faq-a-inner">
+            <p>MetaTrader 5 (MQL5), TradingView (Pine Script), and standalone Python execution. If you trade on another platform, tell us — we build around your setup, not ours.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="true" aria-controls="faq-a2" id="faq-q2">
+          <span>How long does it take to build a bot?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a" id="faq-a2" role="region" aria-labelledby="faq-q2">
+          <div class="faq-a-inner">
+            <p>It depends on complexity. A focused single-pair strategy typically ships in 1–2 weeks; larger multi-strategy systems take 4–6. Either way you get milestones and a working backtest before anything goes live.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="true" aria-controls="faq-a3" id="faq-q3">
+          <span>Do I have to share my strategy with you?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a" id="faq-a3" role="region" aria-labelledby="faq-q3">
+          <div class="faq-a-inner">
+            <p>Yes — the bot is a codification of your rules, so we need to understand them to automate them. Everything is kept confidential, an NDA is available on request, and we never reuse a client's strategy for anyone else.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="true" aria-controls="faq-a4" id="faq-q4">
+          <span>What happens if my strategy changes later?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a" id="faq-a4" role="region" aria-labelledby="faq-q4">
+          <div class="faq-a-inner">
+            <p>Strategies evolve — that's normal. After delivery you get direct support from the founder for tuning, fixes, and adding new rules. Updates are priced per change, and we offer maintenance plans for ongoing care.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="true" aria-controls="faq-a5" id="faq-q5">
+          <span>Will the bot trade with real money automatically?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a" id="faq-a5" role="region" aria-labelledby="faq-q5">
+          <div class="faq-a-inner">
+            <p>Only if and when you decide. You control the account, the risk limits, and a kill switch that stops the bot instantly. Many clients run on a demo account first and only go live when they're comfortable.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="true" aria-controls="faq-a6" id="faq-q6">
+          <span>Is the bot exclusively mine?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a" id="faq-a6" role="region" aria-labelledby="faq-q6">
+          <div class="faq-a-inner">
+            <p>Completely. No templates, no reselling, no shared logic. Your bot is built bespoke from your rules and it stays yours — including the code itself.</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -158,9 +380,9 @@
   </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
